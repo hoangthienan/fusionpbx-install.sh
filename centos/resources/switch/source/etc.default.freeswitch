@@ -1,0 +1,4 @@
+# /etc/default/freeswitch
+FS_USER="nginx"
+FS_GROUP="nginx"
+DAEMON_OPTS="-nonat -ncwait -u nginx -g nginx -run /var/run/freeswitch"

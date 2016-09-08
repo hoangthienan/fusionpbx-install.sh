@@ -81,6 +81,28 @@ if [ $os_check = 'Debian' ]; then
 		error "Although you are running $real_os we require version >= 8"
 		os_unsupported
 	fi
+elif [ $os_check = 'CentOS' ]; then
+	if [ $check_major_release -ge 7 ]; then
+		verbose "Updating system before starting."
+		yum -y epel-release
+		yum group install -y "Development Tools"
+		yum -y update
+		verbose "Installing Git"
+		yum install -y git
+		cd /usr/src
+		verbose "Fetching Installer"
+		if [ -d /usr/src/fusionpbx-install.sh ]; then
+			cd /usr/src/fusionpbx-install.sh
+			git pull
+		else
+			git clone https://github.com/hoangthienan/fusionpbx-install.sh			
+		fi
+		cd /usr/src/fusionpbx-install.sh/centos
+		./install.sh $@
+	else
+		error "Although you are running $real_os we require version >= 7"
+		os_unsupported
+	fi
 else
 	os_unsupported
 fi
