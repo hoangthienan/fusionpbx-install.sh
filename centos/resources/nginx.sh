@@ -5,6 +5,9 @@
 #send a message
 verbose "Install the web server"
 
+systemctl stop httpd
+systemctl disable httpd
+
 cp resources/nginx/nginx.repo /etc/yum.repos.d/nginx.repo
 
 #install dependencies
