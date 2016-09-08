@@ -84,7 +84,7 @@ if [ $os_check = 'Debian' ]; then
 elif [ $os_check = 'CentOS' ]; then
 	if [ $check_major_release -ge 7 ]; then
 		verbose "Updating system before starting."
-		yum -y epel-release
+		yum install -y epel-release
 		yum group install -y "Development Tools"
 		yum -y update
 		verbose "Installing Git"
